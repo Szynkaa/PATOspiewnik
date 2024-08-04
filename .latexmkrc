@@ -1,5 +1,5 @@
 @default_files                     = ('PATOśpiewnik.tex');
-$pdf_mode                          = 1;                      # tex -> pdf
+$pdf_mode                          = 5;                      # xelatex
 $aux_dir                           = 'aux';
 $warnings_as_errors                = 1;
 $cleanup_includes_cusdep_generated = 1;
