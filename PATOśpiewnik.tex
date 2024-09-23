@@ -1,9 +1,11 @@
-\documentclass[a5paper,openright, twoside, 11pt]{book}
+\documentclass[a5paper, openright, twoside, 12pt]{book}
 \usepackage[main=polish, russian]{babel}
 \usepackage{fontsetup}
 \usepackage{graphicx}
-\usepackage[top=15mm,bottom=15mm,left=8mm,bindingoffset=8mm,headheight=15mm,]{geometry}
-\usepackage{titlesec}
+\usepackage[
+  top=10mm, headsep=3mm, headheight=15pt,
+  bottom=13mm, footnotesep=3mm,
+  left=8mm, right=8mm, bindingoffset=6mm]{geometry}
 \usepackage{hyperref}
 \usepackage{gchords}
 \usepackage{array}
@@ -11,85 +13,118 @@
 \usepackage{multicol}
 \usepackage{float}
 \usepackage{xcolor}
+\usepackage{fancyhdr}
+
+%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+
+\renewcommand*{\maketitle}{
+  \begin{titlepage}
+    \begin{center}
+      \vspace*{3cm}
+      \Huge \textsc{\@title}
+
+      \vspace{0.3cm}
+      \Large{\@author}
+
+      \vspace{1cm}
+      \fboxsep=1.5mm
+      \fboxrule=1.5mm
+      \fcolorbox{black}{black!70!}{\includegraphics[width=10cm]{statek2.png}}
+
+      \vspace{3cm}
+      \Large{\@date}
+    \end{center}
+  \end{titlepage}
+}
+
+\renewcommand*{\tableofcontents}{
+   \chapter* {\contentsname}
+   \thispagestyle{fancy}
+   \@starttoc{toc}
+}
+
+\renewcommand*{\section}{
+  \@startsection{section}{1}{\z@}
+    {-3.5ex \@plus -1ex \@minus -.2ex}
+    {2ex \@plus .2ex}
+    {\normalfont\large\bfseries}
+}
+
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%
 
 \author{stworzyły żagle}
 \title{\uppercase{Pato}śpiewnik}
-\date{ver. 21.04}
+\date{ver. test}
 
-\usepackage{fancyhdr}
-\pagestyle{fancy}
 \fancyhf{}
-\fancyhead[RO]{\hyperref[table]{\partcontent}}
-\fancyhead[LE]{\uppercase{Pato} 2021}
+\fancyhead[RO]{\hyperref[toc]{\partcontent}}
+\fancyhead[LE]{\uppercase{Pato} test}
 \fancyfoot[C]{\thepage}
-\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand*{\headrulewidth}{0.5pt}
+\renewcommand*{\footrulewidth}{0.5pt}
 
-\makeatletter
-\renewcommand{\maketitle}{
-\begin{titlepage}
-\begin{center}
-\vspace*{3cm}
-\Huge \textsc{\@title} \\
-\vspace{0.3cm}
-\Large{\@author} \\
-\vspace{1cm}
-\fboxsep=1.5mm
-\fboxrule=1.5mm
-\centerline{\fcolorbox{black}{black!70!}{\includegraphics[width=12cm]{statek2.png}}}
-\vspace{3cm}
-\Large{\@date}
-\end{center}
-\end{titlepage}}
+\setcounter{secnumdepth}{-2}
 
-\renewcommand\section{\@startsection{section}{1}{\z@}
-{-3.5ex \@plus -1ex \@minus -.2ex}
-{2.3ex \@plus.2ex}
-{\normalfont\large\bfseries}}
-	
-\newcommand{\refrenspace}{\hspace{5mm}}
-\newcommand{\akordy}[1]{{\bfseries #1}}
-\newskip\zwrotkaspace
-\zwrotkaspace=2mm
+\newcommand*{\partcontent}{}
+\newcommand*{\songssection}[2]{
+  % #1 part title
+  % #2 part subtitle
+  \part[#1]{#1\\[10mm] {\normalfont{\Large #2}}}
+  \renewcommand*{\partcontent}{#1}
+}
 
-\newenvironment{piosenka}[2][8mm]
+\newcommand*{\refrenspace}{\hspace{5mm}}
+\newcommand*{\akordy}[1]{{\bfseries #1}}
+
+\newlength{\basezwrotkaspace}
+\basezwrotkaspace=2mm
+\newskip{\zwrotkaspace}
+\zwrotkaspace=\basezwrotkaspace
+
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{0pt}
+
+\newenvironment*{piosenka}[2][8mm]
 { \section{#2} \begin{tabular}{@{}l@{\hspace{#1}}>{\bfseries}l} }
 { \end{tabular} }
 
-\newenvironment{piosenka_dluga}[2][8mm]
-{ \section{#2} \setlength\LTpre{0pt} \setlength\LTpost{0pt} \begin{longtable}[l]{@{}l@{\hspace{#1}}>{\bfseries}l} }
+\newenvironment*{piosenka_dluga}[2][8mm]
+{ \section{#2} \begin{longtable}[l]{@{}l@{\hspace{#1}}>{\bfseries}l} }
 { \end{longtable} }
 
-\def\tableofcontents{\section*{\flushleft Spis treści}\@starttoc{toc}}
-\newcommand\partcontent{}
-\makeatother
+%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+
+\pagestyle{empty}
 \maketitle
-\newpage
-\thispagestyle{empty}
 \cleardoublepage
+
+\pagestyle{fancy}
 \tableofcontents
-\label{table}
+\label{toc}
 \cleardoublepage
 
 \input{piosenki.tex}
 
 \newpage
 \thispagestyle{empty}
+
 \begin{center}
-\begin{table}[]
-\centering
-\begin{tabular}{rl}
-Szymon & Antkowiak \\
-Gosia & Pluskota \\
-Emilia & Rzepka \\
-Kacper & Śledź \\
-Paweł & Sieczak \\
-Olga & Zaborska \\
-Jan & Nowosielski \\
-Marysia & Puciata-Morczynska
-\end{tabular}
-\end{table}
+  \begin{tabular}{rl}
+    Szymon  & Antkowiak          \\
+    Gosia   & Pluskota           \\
+    Emilia  & Rzepka             \\
+    Kacper  & Śledź              \\
+    Paweł   & Sieczak            \\
+    Olga    & Zaborska           \\
+    Jan     & Nowosielski        \\
+    Marysia & Puciata-Mroczynska
+  \end{tabular}
 \end{center}
 
 \end{document}
