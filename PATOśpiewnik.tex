@@ -3,7 +3,7 @@
 \usepackage{fontsetup}
 \usepackage{graphicx}
 \usepackage[
-  top=10mm, headsep=3mm, headheight=15pt,
+  top=11mm, headsep=4mm, headheight=15pt,
   bottom=13mm, footnotesep=3mm,
   left=8mm, right=8mm, bindingoffset=6mm]{geometry}
 \usepackage{hyperref}
@@ -14,6 +14,9 @@
 \usepackage{float}
 \usepackage{xcolor}
 \usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{pdflscape}
+\usepackage{emptypage}
 
 %%%%%%%%%%%%%%%%%%%%
 
@@ -40,9 +43,9 @@
 }
 
 \renewcommand*{\tableofcontents}{
-   \chapter* {\contentsname}
-   \thispagestyle{fancy}
-   \@starttoc{toc}
+  \chapter* {\contentsname}
+  \thispagestyle{fancy}
+  \@starttoc{toc}
 }
 
 \renewcommand*{\section}{
@@ -58,43 +61,52 @@
 
 \author{stworzyły żagle}
 \title{\uppercase{Pato}śpiewnik}
-\date{ver. test}
+\date{ver. alfa}
 
 \fancyhf{}
-\fancyhead[RO]{\hyperref[toc]{\partcontent}}
-\fancyhead[LE]{\uppercase{Pato} test}
+\fancyhead[RO]{\hyperref[toc]{\chaptercontent}}
+\fancyhead[LE]{\uppercase{Pato} alfa}
 \fancyfoot[C]{\thepage}
 \renewcommand*{\headrulewidth}{0.5pt}
 \renewcommand*{\footrulewidth}{0.5pt}
 
 \setcounter{secnumdepth}{-2}
 
-\newcommand*{\partcontent}{}
+\newcommand*{\chaptercontent}{}
 \newcommand*{\songssection}[2]{
-  % #1 part title
-  % #2 part subtitle
-  \part[#1]{#1\\[10mm] {\normalfont{\Large #2}}}
-  \renewcommand*{\partcontent}{#1}
+  % #1 chapter title
+  % #2 chapter subtitle
+  \chapter[#1]{#1\\[10mm] {\normalfont{\Large #2}}}
+  \renewcommand*{\chaptercontent}{#1}
+  \cleardoublepage
 }
 
 \newcommand*{\refrenspace}{\hspace{5mm}}
 \newcommand*{\akordy}[1]{{\bfseries #1}}
 
 \newlength{\basezwrotkaspace}
-\basezwrotkaspace=2mm
+\basezwrotkaspace=0.5em
 \newskip{\zwrotkaspace}
 \zwrotkaspace=\basezwrotkaspace
 
-\setlength{\LTpre}{0pt}
+\setlength{\LTpre}{1.5ex}
 \setlength{\LTpost}{0pt}
 
 \newenvironment*{piosenka}[2][8mm]
-{ \section{#2} \begin{tabular}{@{}l@{\hspace{#1}}>{\bfseries}l} }
+{ \section{#2} \begin{tabular}{@{}l@{\hspace{#1}}>{\bfseries}l@{}} }
 { \end{tabular} }
 
 \newenvironment*{piosenka_dluga}[2][8mm]
-{ \section{#2} \begin{longtable}[l]{@{}l@{\hspace{#1}}>{\bfseries}l} }
+{ \section{#2} \begin{longtable}[l]{@{}l@{\hspace{#1}}>{\bfseries}l@{}} }
 { \end{longtable} }
+
+\newenvironment*{piosenkacompact}
+{ \begin{multicols}{2} \columnseprule=.5pt }
+{ \end{multicols} }
+
+\newenvironment*{piosenkacol}
+{ \begin{tabular}{@{}l@{}} }
+{ \end{tabular} }
 
 %%%%%%%%%%%%%%%%%%%%
 
