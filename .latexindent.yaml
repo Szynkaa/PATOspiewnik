@@ -1,0 +1,13 @@
+defaultIndent: "  "
+
+lookForAlignDelims:
+  piosenka: 1
+  piosenka_dluga: 1
+  piosenkacol: 1
+
+removeTrailingWhitespace:
+  beforeProcessing: 1
+  afterProcessing: 1
+
+modifyLineBreaks:
+  preserveBlankLines: 1
