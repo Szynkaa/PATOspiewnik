@@ -1,6 +1,6 @@
 @default_files                     = ('PATOśpiewnik.tex');
 $pdf_mode                          = 5;                      # xelatex
-$aux_dir                           = 'aux';
+$out_dir                           = 'aux';
 $warnings_as_errors                = 1;
 $cleanup_includes_cusdep_generated = 1;
 
@@ -11,9 +11,8 @@ sub dir2tex {
 
 add_cus_dep( 'd', 'tex', 0, 'dir2tex' );
 
-my $extra_dir = $aux_dir . '/piosenki';
+my $extra_dir = $out_dir . '/piosenki';
 if (! -d $extra_dir) {
-    mkdir $aux_dir;
+    mkdir $out_dir or die "Cannot create";
     mkdir $extra_dir or die "Cannot create";
 }
-print $extra_dir;
